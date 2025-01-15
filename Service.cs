@@ -4,18 +4,25 @@ using Microsoft.Azure.Cosmos;
 
 public class Service
 {
-    public void GetInvalidClient()
+    public void GetInvalidAccountKeyClient()
     {
-        string endpoint = "<example-endpoint>";
+        string endpoint = "<insecure-example-endpoint>";
 
-        string key = "<example-key>";
+        string key = "<insecure-example-ropc>";
 
         CosmosClient client = new(endpoint, key);
     }
 
-    public void GetValidClient()
+    public void GetInvalidConnectionStringClient()
     {
-        string endpoint = "<example-endpoint>";
+        string connectionString = "<insecure-example-connection-string>";
+
+        CosmosClient client = new(connectionString);
+    }
+
+    public void GetValidRBACClient()
+    {
+        string endpoint = "<secure-example-endpoint>";
 
         TokenCredential tokenCredential = new ChainedTokenCredential(
             new ManagedIdentityCredential(),
